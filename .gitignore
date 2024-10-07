@@ -1,2 +1,4 @@
 node_modules
 .env
+backend/assets
+frontend/src/assets

@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, Link} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { Toaster, toast } from 'sonner'
+
+
+
+
+import { userLogin } from '../../redux/userRdx/userThunk'
 
 const validationSchema = Yup.object({
     email: Yup.string()
@@ -14,6 +21,17 @@ const validationSchema = Yup.object({
 })
 
 function Login() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const userData = useSelector((store) => store.user.data)
+    
+    if(userData){
+        toast.success('Successfully login');
+        setTimeout(() => {
+            navigate('/')
+        }, 2000)
+    }
+
 
     const formik = useFormik({
         initialValues: {
@@ -21,14 +39,18 @@ function Login() {
             password: ''
         },
         validationSchema,
-        onSubmit: async (values) => {
-            alert(values)
+        onSubmit: async (credentials) => {
+            
+            dispatch(userLogin(credentials));
         }
     })
 
 
   return (
-    <div className='h-screen flex items-center justify-center bg-purple-300'>
+    <>
+   
+    <div className='h-screen flex items-center justify-center bg-gradient-to-t from-purple-400 to-gray-600'>
+        <Toaster position='top-center' richColors />
       <form
       onSubmit={formik.handleSubmit}
       className='shadow-md rounded-md px-8 pt-6 pb-8 mb-4 bg-white'>
@@ -70,14 +92,14 @@ function Login() {
         >
          Login
         </button>
-        <p className='text-center text-gray-500 mt-4'>Doesn't have an account? 
-        <Link to={'/signup'}>
-        <span className='font-bold cursor-pointer hover:text-purple-500 hover:underline'>
+        <p className='text-center text-gray-500 mt-4'>Doesn't have an account?
+        <Link to={'/signup'}> <span className='font-bold cursor-pointer hover:text-purple-500 hover:underline'>
             Signup
-        </span></Link>
+            </span></Link>
         </p>
       </form>
     </div>
+    </>
   )
 }
 

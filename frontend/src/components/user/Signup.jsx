@@ -57,7 +57,7 @@ const Signup = () => {
     
     return (
        
-        <div className="h-screen flex items-center justify-center bg-purple-300">
+        <div className="h-screen flex items-center justify-center bg-gradient-to-t from-purple-400 to-gray-600">
         <Toaster position="top-center" richColors/>
             <form onSubmit={formik.handleSubmit}
             className="shadow-md rounded-md px-8 pt-6 pb-8 mb-4 bg-white">
