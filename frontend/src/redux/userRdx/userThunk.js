@@ -47,6 +47,7 @@ export const userLogin = createAsyncThunk('user/userLogin', async (credentials, 
             toast.error('User is blocked')
             return isRejectedWithValue('user is blocked')
         } else {
+            toast.success('Successfully login')
             return data
         }
 
@@ -81,6 +82,12 @@ export const updateDetails = createAsyncThunk('user/updateDetails', async ({form
     } else {
         toast.error('Request failed please try again')
     }
+    return data
+})
+
+export const getUserData = createAsyncThunk('user/getUserData', async ({userId}) => {
+    console.log('User iddddddd: ', userId)
+    const { data } = await axios.post('/api/getData', {userId})
     return data
 })
 

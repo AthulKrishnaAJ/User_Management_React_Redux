@@ -142,9 +142,30 @@ const updateUserDetils = async (req, res) => {
         res.json({status: 'failed'})
     }
 }
+
+
+const getData = async (req, res) => {
+    try{
+        const userId = req.body.userId
+    
+        const userData = await User.findById(userId)
+        const data = {}
+
+        for(let key in userData.toObject()){
+            if (key !== 'password'){
+                data[key] = userData[key]
+            }
+        }
+        console.log(data)
+        res.json({userData: data})
+    }catch(error) {
+        console.log('Error in fetcing data: ', error.message)
+    }
+}
 module.exports = {
     signupPost,
     loginPost,
     addImage,
-    updateUserDetils
+    updateUserDetils,
+    getData
 }

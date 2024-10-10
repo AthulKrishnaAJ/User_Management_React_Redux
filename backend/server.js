@@ -6,6 +6,7 @@ const path = require('path')
 
 const connectDatabase = require('./config/db')
 const userRoute = require('./routes/userRoute')
+const adminRoute = require('./routes/adminRoute')
 
 dotenv.config();
 const app = express();
@@ -22,7 +23,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}));
 app.use('/images', express.static(path.join(__dirname, '/assets')))
 
+
 app.use('/', userRoute)
+app.use('/admin', adminRoute)
 
 
 app.listen(port, () => {

@@ -10,28 +10,16 @@ const UserAuth = ({children}) => {
         if(!token){
             console.log('User has no token')
             navigate('/login')
-        }
+        } 
     }, [])
 
+    console.log('children: ', children)
+
     if(token){
+        console.log('token inddddd')
         return children
     }
 }
 
 export default UserAuth
 
-export const UserLoggedIn = ({children}) => {
-    const navigate = useNavigate()
-    const token = useSelector((store) => store.user.token)
-
-    useEffect(() => {   
-        if(token){
-            console.log('user have token')
-            navigate('/')
-        }
-    })
-
-    if(!token){
-        return children
-    }
-}

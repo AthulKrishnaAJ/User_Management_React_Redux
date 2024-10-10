@@ -6,18 +6,18 @@ import * as Yup from 'yup'
 import { Toaster, toast } from 'sonner'
 
 
-
-
 import { userLogin } from '../../redux/userRdx/userThunk'
+
+
 
 const validationSchema = Yup.object({
     email: Yup.string()
             .trim()
-            .required('Field is required')
-            .email('Invalid email address'),
+            .required('field is required')
+            .email('invalid email address'),
     password: Yup.string()
              .trim()   
-             .required('Field is required')
+             .required('field is required')
 })
 
 function Login() {
@@ -25,13 +25,13 @@ function Login() {
     const dispatch = useDispatch()
     const userData = useSelector((store) => store.user.data)
     
-    if(userData){
-        toast.success('Successfully login');
-        setTimeout(() => {
+    useEffect(() => {
+        if(userData){
             navigate('/')
-        }, 2000)
-    }
-
+            console.log('user data in the loginpage: ', userData)
+        }
+    }, [userData])
+    
 
     const formik = useFormik({
         initialValues: {
@@ -55,7 +55,7 @@ function Login() {
       onSubmit={formik.handleSubmit}
       className='shadow-md rounded-md px-8 pt-6 pb-8 mb-4 bg-white'>
         <h2 className='text-3xl font-bold text-gray-600 text-center mt-4'>Login</h2>
-        <div className='block text-gray-700 text-sm  mb-2'>
+        <div className='block text-gray-700 text-sm mb-2'>
             <label htmlFor="email" className='text-gray-500 font-bold'>Email</label><br />
             {formik.touched.email && formik.errors.email ? 
                 <p className='text-red-400 text-xs'>{formik.errors.email}</p> : null}

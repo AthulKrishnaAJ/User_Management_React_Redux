@@ -1,13 +1,18 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-// Components
+// user components
 import Signup from './components/user/Signup'
 import Login from './components/user/Login'
 import Home from './pages/user/Home'
 
+// admin components
+import AdminLogin from './pages/admin/Login'
+import AdminHome from './pages/admin/AdminHome'
+
 // Auth
-import UserAuth, { UserLoggedIn } from './auth/user/UserAuth'
+import UserAuth from './auth/user/UserAuth'
+import AdminAuth from './auth/admin/AdminAuth'
 
 
 import './index.css'
@@ -28,11 +33,16 @@ function App() {
             </UserAuth>
           }></Route>
         <Route path='/login' element={
-          <UserLoggedIn>
-            <Login/>
-          </UserLoggedIn>
+            <Login/>  
           }></Route>
         <Route path='/signup' element={<Signup/>}></Route>
+        <Route path='/admin/login' element={<AdminLogin/>}></Route>
+        <Route path='/admin/home' 
+        element={
+          <AdminAuth>
+            <AdminHome/>
+          </AdminAuth>
+        }></Route>
       </Routes>
       </Provider>
     </BrowserRouter>

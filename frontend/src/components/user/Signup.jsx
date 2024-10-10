@@ -10,25 +10,25 @@ import { signupThunk } from "../../redux/userRdx/userThunk";
 const validationSchema = Yup.object({
     name: Yup.string()
             .trim()
-            .required('Field is required')
-            .matches(/^[a-zA-Z\s]+$/, 'Enter a valid name'),
+            .required('field is required')
+            .matches(/^[a-zA-Z\s]+$/, 'enter a valid name'),
     email: Yup.string()
             .trim()
-            .required('Field is required')
-            .email('Invalid email address'),
+            .required('field is required')
+            .email('invalid email address'),
     mobile: Yup.string()
             .trim()
-            .required('Field is required')
-            .matches( /^[0-9]+$/, 'Invalid mobile number')
-            .matches(/^[0-9]{10}$/, 'Mobile number must be 10 digits'),
+            .required('field is required')
+            .matches( /^[0-9]+$/, 'invalid mobile number')
+            .matches(/^[0-9]{10}$/, 'mobile number must be 10 digits'),
     password: Yup.string()
              .trim()
-             .required('Field is required')
-             .min(8, 'Password must be at least 8 characters'),
+             .required('field is required')
+             .min(8, 'password must be at least 8 characters'),
     confirmPassword: Yup.string()
                     .trim()
-                    .required('Field is required')
-                    .oneOf([Yup.ref('password'), null], 'Password must match')
+                    .required('field is required')
+                    .oneOf([Yup.ref('password'), null], 'password must match')
 });
 
 const Signup = () => {

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLogin, addProfileImage, updateDetails } from "./userThunk";
+import { userLogin, addProfileImage, updateDetails, getUserData } from "./userThunk";
 
 // localStorage.removeItem('data')
 // localStorage.removeItem('token')
@@ -45,6 +45,12 @@ const userSlice = createSlice ({
         })
 
         builder.addCase(updateDetails.fulfilled, (state, action) => {
+            const { userData } = action.payload
+            localStorage.setItem('data', JSON.stringify(userData))
+            state.data = userData
+        })
+
+        builder.addCase(getUserData.fulfilled, (state, action) => {
             const { userData } = action.payload
             localStorage.setItem('data', JSON.stringify(userData))
             state.data = userData

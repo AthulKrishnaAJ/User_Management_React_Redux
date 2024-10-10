@@ -6,21 +6,25 @@ import * as Yup from 'yup'
 import { Toaster } from 'sonner'
 import staticImg from '../../assets/images/userIcon.jpg'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-import { addProfileImage, updateDetails } from '../../redux/userRdx/userThunk'
+import { addProfileImage, updateDetails, getUserData } from '../../redux/userRdx/userThunk'
+
+
 
 
 function Home() {
     const [image, setImage] = useState(null)
     const [edit, setEdit] = useState(false)
 
-
     const dispatch = useDispatch()
     const user = useSelector((store) => store.user.data)
 
- 
 
+ 
     useEffect(() => {
+        console.log('Userrrrrr: ', user._id)
+        dispatch(getUserData({userId: user._id}))
         window.history.pushState(null, null, window.location.href);
 
         const handlePopState = (event) => {
@@ -33,6 +37,7 @@ function Home() {
             window.removeEventListener("popstate", handlePopState);
           };
     },[]);
+
 
     const validationSchema = Yup.object({
         name: Yup.string()
@@ -58,9 +63,8 @@ function Home() {
         },
         validationSchema,
         onSubmit: (values) => {
-            console.log(values)
-            console.log(user._id)
-            dispatch(updateDetails({formData: values, userId: user._id}))
+          dispatch(updateDetails({formData: values, userId: user._id}))
+          setEdit(false)
         }
     })
 
@@ -108,11 +112,11 @@ function Home() {
 
         { edit ? (
             <>
-              <div className="flex justify-end">
+            <div className="flex justify-end">
                 <button className='bg-purple-500 py-1 px-2 text-white rounded-md hover:bg-purple-600 font-semibold'
                 onClick={() => setEdit(false)}
                 >
-                Back to profile
+               <KeyboardArrowLeftIcon/>back to profile 
                 </button>
             </div>
           <form onSubmit={formik.handleSubmit} className="space-y-2">
@@ -175,11 +179,11 @@ function Home() {
           </form>
           </>
         ) : (
-          <div className="text-center space-y-4">
-            <p className="text-lg font-bold text-gray-600">User Information</p>
-            <p className="text-gray-700">Name: {user?.name || "Not provided"}</p>
-            <p className="text-gray-700">Email: {user?.email || "Not provided"}</p>
-            <p className="text-gray-700">Phone: {user?.mobile || "Not provided"}</p>
+          <div className="text-center space-y-2">
+            <p className="text-lg font-bold text-gray-600 underline">User Information</p>
+            <p className="text-gray-700 font-semibold">Name: {user?.name || "Not provided"}</p>
+            <p className="text-gray-700 font-semibold">Email: {user?.email || "Not provided"}</p>
+            <p className="text-gray-700 font-semibold">Phone: {user?.mobile || "Not provided"}</p>
             <button
               className="mt-4 py-2 px-4 bg-purple-500 text-white rounded-md hover:bg-purple-600"
               onClick={() => setEdit(true)}
