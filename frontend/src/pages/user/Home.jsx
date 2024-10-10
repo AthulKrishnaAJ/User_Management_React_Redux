@@ -116,7 +116,7 @@ function Home() {
                 <button className='bg-purple-500 py-1 px-2 text-white rounded-md hover:bg-purple-600 font-semibold'
                 onClick={() => setEdit(false)}
                 >
-               <KeyboardArrowLeftIcon/>back to profile 
+               <KeyboardArrowLeftIcon/>Profile 
                 </button>
             </div>
           <form onSubmit={formik.handleSubmit} className="space-y-2">

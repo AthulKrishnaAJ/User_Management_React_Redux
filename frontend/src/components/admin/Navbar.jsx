@@ -42,7 +42,7 @@ function Navbar({onSearch}) {
         <nav className="p-2">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="text-white text-xl font-bold">
-                    <h1>Admin Dashboard</h1>
+                    <h1 className='text-3xl text-gray-200'>Admin Dashboard</h1>
                 </div>
                 <div className='flex space-x-8'>
                     <input 

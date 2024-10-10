@@ -26,7 +26,7 @@ function Navbar() {
             customClass: {
                 popup:'custom-swal-ask',
                 confirmButton: 'bg-gray-600 text-white px-4 py-2 rounded-md',
-                cancelButton: 'bg-red-500 text-white px-4 py-2 rounded-md',
+                cancelButton: 'bg-purple-500 text-white px-4 py-2 rounded-md',
             }
         }).then((result) => {
             if (result.isConfirmed) {
